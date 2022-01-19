@@ -20,6 +20,11 @@ public class Lambda {
          *          - 기존 객체의 apply 의 리턴 값을 after 의 매개변수로 사용하는 새로운 Function 객체를 반환
          */
         Function<Integer, Integer> adder = x -> x + 10;
+
+        /**
+         * Function Composition
+         *  - 여러 개의 함수를 합쳐 하나의 새로운 함수로 만드는 것
+         */
         Function<Integer, Integer> composeMulti = adder.compose(x -> x * 100);
         Function<Integer, Integer> andThenMulti = adder.andThen(x -> x * 100);
 

@@ -13,7 +13,6 @@ import java.util.stream.IntStream;
  * ForEach
  *  - 매개변수의 action을 스트림의 각 데이터에 적용해주는 종결 처리 메서드
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StreamForEach {
 
     List<Integer> nums = Arrays.asList(12, 123, 15, 94, 14);
