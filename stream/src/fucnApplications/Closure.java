@@ -2,7 +2,7 @@ package fucnApplications;
 
 import org.junit.Test;
 
-import java.util.function.BiFunction;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  *  - 외부에서는 내부에 있는 변수에 접근이 가능하지만 그 반대는 불가능 (Lexical Scope)
  *
  * Closure
- *  - 내부 함수가 존재하는 한 내부 함수가 사용한 외부 함수의 변수들 역시 계속 존재하게 되는데 이렇게 Lexical Scope를 포함하는 함수를 closure 라고 한다.
+ *  - 외부함수 안에서 정의된 내부 함수가 외부 함수의 context에 접근할 수 있는 개념. 함수는 선언된 위치에 따라 상위 scope를 결정하며 이를 Lexical Scope 라고 한다.
  *  - 내부 함수가 사용한 외부 함수들의 변수들은 내부 함수 선언 당시로부터 변할 수 없기 때문에 final 로 선언되지 않더라도 암묵적으로 final로 취급된다.
  *
  */
@@ -27,8 +27,10 @@ public class Closure {
     }
     @Test
     public void testClosure() {
-        // 메서드 호출이 끝난 시점에서 변수 name은 제거되어야 하지만 리턴된 supplier 가 내부에서 name을 요구하므로 남아있게된다.
+        System.out.println("Closure.testClosure");
+
         Supplier<String> supplier = getSupplier();
+        System.out.println(supplier.get());
     }
 
 
@@ -42,9 +44,11 @@ public class Closure {
         Function<Integer, Function<Integer, Integer>> curriedAdd = x -> (y -> x + y);
 
         Function<Integer, Integer> addFive = curriedAdd.apply(5);
+        Integer addFiveAddTwo = addFive.apply(2);
+        Integer addFiveAddEleven = addFive.apply(11);
 
         System.out.println("Closure.testCurry");
-        System.out.println("2 + 5 = " + addFive.apply(2));
-        System.out.println("11 + 5 = " + addFive.apply(11));
+        System.out.println("5 + 2 = " + addFiveAddTwo);
+        System.out.println("5 + 11 = " + addFiveAddEleven);
     }
 }
